@@ -4,9 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TelekMain {
 
@@ -89,6 +88,29 @@ public class TelekMain {
         return cimek;
     }
 
+    private Set<String> getTobbsavosUtcak() {
+        Set<String> tobbSavosak = new TreeSet<>();
+        Set<String> aSet = telekList.stream()
+                .filter(telek -> telek.getAdoSav().equals("A"))
+                .map(Telek::getUtca)
+                .collect(Collectors.toSet());
+        Set<String> bSet = telekList.stream()
+                .filter(telek -> telek.getAdoSav().equals("B"))
+                .map(Telek::getUtca)
+                .collect(Collectors.toSet());
+        Set<String> cSet = telekList.stream()
+                .filter(telek -> telek.getAdoSav().equals("C"))
+                .map(Telek::getUtca)
+                .collect(Collectors.toSet());
+        aSet.retainAll(bSet);
+        bSet.retainAll(cSet);
+        cSet.retainAll(aSet);
+        tobbSavosak.addAll(aSet);
+        tobbSavosak.addAll(bSet);
+        tobbSavosak.addAll(cSet);
+        return tobbSavosak;
+    }
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -115,6 +137,10 @@ public class TelekMain {
         sav = "C";
         System.out.printf("%s sávba %d telek esik, az adó %d Ft.\n", sav, telekMain.telekSzamPerSav(sav), telekMain.adoPerSav(sav));
 
+        System.out.println("6. feladat. A több sávba sorolt utcák: ");
+        Set<String> tobbsavosUtcak = telekMain.getTobbsavosUtcak();
+        tobbsavosUtcak.forEach(System.out::println);
     }
+
 
 }

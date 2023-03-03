@@ -82,7 +82,6 @@ public class TelekNyilvantartas {
     }
 
     public Set<String> getTobbsavosUtcak() {
-        Set<String> tobbSavosak = new TreeSet<>();
         Set<String> aSet = getASet();
         Set<String> bSet = getBSet();
         Set<String> cSet = getCSet();
@@ -125,10 +124,10 @@ public class TelekNyilvantartas {
     public void writeToFile(Path path) {
         Map<String, Integer> tulajdonosok = getTulajdonosok();
         try (BufferedWriter bufferedWriter = Files.newBufferedWriter(path)) {
-            for (String adoszam : tulajdonosok.keySet()) {
-                bufferedWriter.write(adoszam
+            for (Map.Entry<String, Integer> entry : tulajdonosok.entrySet()) {
+                bufferedWriter.write(entry.getKey()
                         .concat(" ")
-                        .concat(tulajdonosok.get(adoszam).toString())
+                        .concat(entry.getValue().toString())
                         .concat(System.lineSeparator()));
             }
         } catch (IOException ioException) {

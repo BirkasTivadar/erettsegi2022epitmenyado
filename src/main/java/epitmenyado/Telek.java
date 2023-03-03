@@ -3,15 +3,15 @@ package epitmenyado;
 
 public class Telek {
 
-    private String adoszam;
+    private final String adoszam;
 
-    private String utca;
+    private final String utca;
 
-    private String hazszam;
+    private final String hazszam;
 
-    private String adoSav;
+    private final String adoSav;
 
-    private int alapTerulet;
+    private final int alapTerulet;
 
     private int ado;
 

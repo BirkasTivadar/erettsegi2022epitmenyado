@@ -56,29 +56,28 @@ public class TelekNyilvantartas {
 
 
     private void createNewTelek(String adoszam, String utca, String hazszam, String adoSav, int alapTerulet, int epitmenyAdo) {
-        Telek telek = new Telek(adoszam, utca, hazszam, adoSav, alapTerulet);
-        telek.setAdo(epitmenyAdo);
+        Telek telek = new Telek(adoszam, utca, hazszam, adoSav, alapTerulet, epitmenyAdo);
         telekList.add(telek);
     }
 
     public long telekSzamPerSav(String sav) {
         return telekList.stream()
-                .filter(t -> t.getAdoSav().equals(sav))
+                .filter(t -> t.adoSav().equals(sav))
                 .count();
     }
 
     public long adoPerSav(String sav) {
         return telekList.stream()
-                .filter(t -> t.getAdoSav().equals(sav))
-                .mapToInt(Telek::getAdo)
+                .filter(t -> t.adoSav().equals(sav))
+                .mapToInt(Telek::ado)
                 .sum();
     }
 
     public List<String> getCimek(String adoszam) {
         List<String> cimek = new ArrayList<>();
         telekList.stream()
-                .filter(t -> t.getAdoszam().equals(adoszam))
-                .forEach(t -> cimek.add(String.format("%s utca %s", t.getUtca(), t.getHazszam())));
+                .filter(t -> t.adoszam().equals(adoszam))
+                .forEach(t -> cimek.add(String.format("%s utca %s", t.utca(), t.hazszam())));
         return cimek;
     }
 
@@ -92,22 +91,22 @@ public class TelekNyilvantartas {
 
     private Set<String> getASet() {
         return telekList.stream()
-                .filter(telek -> telek.getAdoSav().equals("A"))
-                .map(Telek::getUtca)
+                .filter(telek -> telek.adoSav().equals("A"))
+                .map(Telek::utca)
                 .collect(Collectors.toSet());
     }
 
     private Set<String> getBSet() {
         return telekList.stream()
-                .filter(telek -> telek.getAdoSav().equals("B"))
-                .map(Telek::getUtca)
+                .filter(telek -> telek.adoSav().equals("B"))
+                .map(Telek::utca)
                 .collect(Collectors.toSet());
     }
 
     private Set<String> getCSet() {
         return telekList.stream()
-                .filter(telek -> telek.getAdoSav().equals("C"))
-                .map(Telek::getUtca)
+                .filter(telek -> telek.adoSav().equals("C"))
+                .map(Telek::utca)
                 .collect(Collectors.toSet());
     }
 
@@ -140,8 +139,8 @@ public class TelekNyilvantartas {
     private Map<String, Integer> getTulajdonosok() {
         Map<String, Integer> tulajdonosok = new HashMap<>();
         for (Telek telek : telekList) {
-            if (!tulajdonosok.containsKey(telek.getAdoszam())) tulajdonosok.put(telek.getAdoszam(), telek.getAdo());
-            else tulajdonosok.put(telek.getAdoszam(), tulajdonosok.get(telek.getAdoszam()) + telek.getAdo());
+            if (!tulajdonosok.containsKey(telek.adoszam())) tulajdonosok.put(telek.adoszam(), telek.ado());
+            else tulajdonosok.put(telek.adoszam(), tulajdonosok.get(telek.adoszam()) + telek.ado());
         }
         return tulajdonosok;
     }

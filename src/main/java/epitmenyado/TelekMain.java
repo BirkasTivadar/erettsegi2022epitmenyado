@@ -108,6 +108,7 @@ public class TelekMain {
         tobbSavosak.addAll(aSet);
         tobbSavosak.addAll(bSet);
         tobbSavosak.addAll(cSet);
+//      tobbSavosak.addAll(aSet).addAll(bSet).addAll(cSet);        
         return tobbSavosak;
     }
 

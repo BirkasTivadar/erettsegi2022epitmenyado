@@ -84,18 +84,35 @@ public class TelekNyilvantartas {
 
     public Set<String> getTobbsavosUtcak() {
         Set<String> tobbSavosak = new TreeSet<>();
-        Set<String> aSet = telekList.stream()
+        Set<String> aSet = getASet();
+        Set<String> bSet = getBSet();
+        Set<String> cSet = getCSet();
+        return getTobbsavosak(aSet, bSet, cSet);
+    }
+
+    private Set<String> getASet() {
+        return telekList.stream()
                 .filter(telek -> telek.getAdoSav().equals("A"))
                 .map(Telek::getUtca)
                 .collect(Collectors.toSet());
-        Set<String> bSet = telekList.stream()
+    }
+
+    private Set<String> getBSet() {
+        return telekList.stream()
                 .filter(telek -> telek.getAdoSav().equals("B"))
                 .map(Telek::getUtca)
                 .collect(Collectors.toSet());
-        Set<String> cSet = telekList.stream()
+    }
+
+    private Set<String> getCSet() {
+        return telekList.stream()
                 .filter(telek -> telek.getAdoSav().equals("C"))
                 .map(Telek::getUtca)
                 .collect(Collectors.toSet());
+    }
+
+    private Set<String> getTobbsavosak(Set<String> aSet, Set<String> bSet, Set<String> cSet) {
+        Set<String> tobbSavosak = new TreeSet<>();
         aSet.retainAll(bSet);
         bSet.retainAll(cSet);
         cSet.retainAll(aSet);
@@ -104,6 +121,7 @@ public class TelekNyilvantartas {
         tobbSavosak.addAll(cSet);
         return tobbSavosak;
     }
+
 
     public void writeToFile(Path path) {
         Map<String, Integer> tulajdonosok = getTulajdonosok();

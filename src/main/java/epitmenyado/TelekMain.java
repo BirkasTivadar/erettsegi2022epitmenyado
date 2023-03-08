@@ -28,12 +28,13 @@ public class TelekMain {
 //      5. feladat
         System.out.println("5. feladat");
 
+        String adosavOsszesito = "%s sávba %d telek esik, az adó %d Ft.%n";
         String sav = "A";
-        System.out.printf("%s sávba %d telek esik, az adó %d Ft.\n", sav, telekNyilvantartas.telekSzamPerSav(sav), telekNyilvantartas.adoPerSav(sav));
+        System.out.printf(adosavOsszesito, sav, telekNyilvantartas.telekSzamPerSav(sav), telekNyilvantartas.adoPerSav(sav));
         sav = "B";
-        System.out.printf("%s sávba %d telek esik, az adó %d Ft.\n", sav, telekNyilvantartas.telekSzamPerSav(sav), telekNyilvantartas.adoPerSav(sav));
+        System.out.printf(adosavOsszesito, sav, telekNyilvantartas.telekSzamPerSav(sav), telekNyilvantartas.adoPerSav(sav));
         sav = "C";
-        System.out.printf("%s sávba %d telek esik, az adó %d Ft.\n", sav, telekNyilvantartas.telekSzamPerSav(sav), telekNyilvantartas.adoPerSav(sav));
+        System.out.printf(adosavOsszesito, sav, telekNyilvantartas.telekSzamPerSav(sav), telekNyilvantartas.adoPerSav(sav));
 
 //      6. feladat
         System.out.println("6. feladat. A több sávba sorolt utcák: ");
